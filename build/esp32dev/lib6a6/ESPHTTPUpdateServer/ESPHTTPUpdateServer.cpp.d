@@ -1,6 +1,26 @@
-build/esp32dev/src/main.cpp.o: src/main.cpp \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp_arduino_version.h \
+build/esp32dev/lib6a6/ESPHTTPUpdateServer/ESPHTTPUpdateServer.cpp.o: \
+ .pio/libdeps/esp32dev/ESPHTTPUpdateServer/src/ESPHTTPUpdateServer.cpp \
+ .pio/libdeps/esp32dev/ESPHTTPUpdateServer/src/ESPHTTPUpdateServer.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src/WebServer.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFi.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/WString.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/pgmspace.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Printable.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPAddress.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/WString.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Printable.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPv6Address.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiType.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_wifi_types.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_private/esp_wifi_types_private.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_err.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_compiler.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_interface.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_event/include/esp_event_base.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiSTA.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiGeneric.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_event/include/esp_event.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/FreeRTOS.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos/FreeRTOSConfig.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_compiler.h \
@@ -33,8 +53,6 @@ build/esp32dev/src/main.cpp.o: src/main.cpp \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/cpu.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_cpu.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/cpu_hal.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_err.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_compiler.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/soc_caps.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/cpu_types.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/esp32/include/hal/cpu_ll.h \
@@ -63,84 +81,10 @@ build/esp32dev/src/main.cpp.o: src/main.cpp \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/task.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/list.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos/task_snapshot.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/semphr.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/queue.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/task.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_sleep.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/touch_sensor_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/gpio_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/include/soc/gpio_periph.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/io_mux_reg.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_struct.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_reg.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_sig_map.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/semphr.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/queue.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/event_groups.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/timers.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-log.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/log/include/esp_log.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/log/include/esp_log_internal.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-matrix.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-uart.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-gpio.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/variants/esp32/pins_arduino.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-touch.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-dac.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include/driver/gpio.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_intr_alloc.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_rom/include/esp32/rom/gpio.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-adc.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-spi.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-i2c.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-ledc.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-rmt.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-sigmadelta.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-timer.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-bt.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-psram.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-rgb-led.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-cpu.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp8266-compat.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/stdlib_noniso.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/binary.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/WCharacter.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/WString.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/pgmspace.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Stream.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Printable.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPAddress.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/WString.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Printable.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Client.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Server.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Udp.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Stream.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPAddress.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/HardwareSerial.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/HWCDC.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Esp.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_partition.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_flash.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/spi_flash_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/esp_flash_err.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_spi_flash.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_spi_flash_counters.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/spiram.h \
- src/wifi-manager.h .pio/libdeps/esp32dev/WiFiManager/WiFiManager.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFi.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPv6Address.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiType.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_wifi_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_private/esp_wifi_types_private.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_interface.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_event/include/esp_event_base.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiSTA.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiGeneric.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_event/include/esp_event.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_event/include/esp_event_base.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_event/include/esp_event_legacy.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_netif/include/esp_netif.h \
@@ -183,40 +127,77 @@ build/esp32dev/src/main.cpp.o: src/main.cpp \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiAP.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiScan.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiClient.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp_arduino_version.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_sleep.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/touch_sensor_types.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/gpio_types.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/include/soc/gpio_periph.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/io_mux_reg.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_struct.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_reg.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_sig_map.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/event_groups.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/timers.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-log.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/log/include/esp_log.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/log/include/esp_log_internal.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-matrix.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-uart.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-gpio.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/variants/esp32/pins_arduino.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-touch.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-dac.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include/driver/gpio.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_intr_alloc.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_types.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_rom/include/esp32/rom/gpio.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-adc.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-spi.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-i2c.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-ledc.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-rmt.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-sigmadelta.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-timer.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-bt.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-psram.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-rgb-led.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-cpu.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp8266-compat.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/stdlib_noniso.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/binary.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/WCharacter.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Stream.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPAddress.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Client.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Server.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Udp.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Stream.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/HardwareSerial.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/HWCDC.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Esp.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_partition.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_flash.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/spi_flash_types.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/esp_flash_err.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_spi_flash.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_spi_flash_counters.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/spiram.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Client.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiServer.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Server.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiUdp.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/Udp.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/cbuf.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_wifi.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_wifi_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_private/esp_wifi_private.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_wifi_crypto_types.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_private/wifi_os_adapter.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include/esp_wifi_default.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/Update/src/Update.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/MD5Builder.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_rom/include/esp_rom_md5.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src/WebServer.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src/HTTP_Method.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/nghttp/port/include/http_parser.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src/Uri.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src/detail/RequestHandler.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/DNSServer/src/DNSServer.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiUdp.h \
- .pio/libdeps/esp32dev/WiFiManager/wm_strings_en.h \
- .pio/libdeps/esp32dev/WiFiManager/wm_consts_en.h \
- .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson.h \
- .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson.hpp \
- .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson/Configuration.hpp \
- src/filesystem.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/LittleFS/src/LittleFS.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/FS/src/FS.h \
- src/types.h src/web-server.h src/leds.h src/mqttparsingutility.h \
- .pio/libdeps/esp32dev/ESPHTTPUpdateServer/src/ESPHTTPUpdateServer.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/HTTPUpdate/src/HTTPUpdate.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiClient.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiUdp.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/HTTPClient/src/HTTPClient.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src/WiFiClientSecure.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src/ssl_client.h \
@@ -257,6 +238,7 @@ build/esp32dev/src/main.cpp.o: src/main.cpp \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/mbedtls/port/include/aes/esp_aes.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/aes_types.h \
  /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/mbedtls/mbedtls/include/mbedtls/error.h \
- /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/StreamString.h \
- src/www/setupPage.h src/www/updatePage.h src/mqttmanager.h \
- .pio/libdeps/esp32dev/PubSubClient/src/PubSubClient.h
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/libraries/Update/src/Update.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/MD5Builder.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_rom/include/esp_rom_md5.h \
+ /Users/dutchdeveloper/.platformio/packages/framework-arduinoespressif32/cores/esp32/StreamString.h
