@@ -1,0 +1,66 @@
+# Nom du workflow affiché dans l'interface GitHub Actions
+name: PlatformIO Build & Release
+
+# Événements qui déclenchent ce workflow
+on:
+  push:
+    branches:
+      - main # S'exécute sur les pushes vers main, y compris les merges directs
+    tags:
+      - 'v*' # Déclenche le workflow lors du push d'un tag commençant par 'v' (ex: v1.0.0)
+  pull_request:
+    types: [closed] # S'exécute quand une pull request est fermée
+    branches:
+      - main # Spécifie que cela concerne les PRs ciblant la branche main
+    if: github.event.pull_request.merged == true # S'exécute seulement si la PR a été mergée
+  release:
+    types:
+      - created # Déclenche le workflow lors de la création manuelle d'une nouvelle release
+
+# Définition des jobs à exécuter
+jobs:
+  build_and_release:
+    # Exécute le job sur une machine virtuelle Ubuntu
+    runs-on: ubuntu-latest
+
+    # Étapes du job
+    steps:
+      # Étape 1: Cloner le dépôt GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Étape 2: Configurer Python (nécessaire pour PlatformIO)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' # Utilise la dernière version de Python 3
+
+      # Étape 3: Installer PlatformIO Core
+      - name: Install PlatformIO Core
+        run: pip install platformio
+
+      # Étape 4: Construire le projet PlatformIO
+      # Cette étape va compiler votre code pour toutes les cartes définies dans platformio.ini
+      - name: Build PlatformIO project
+        run: |
+          echo "Démarrage de la compilation PlatformIO..."
+          pio run
+          echo "Compilation PlatformIO terminée."
+
+      # Étape 6: Créer une release GitHub et uploader les artefacts (si déclenché par tag ou release manuelle)
+      - name: Create GitHub Release and Upload Assets
+        # Cette étape s'exécute si le workflow est déclenché par un push de tag ou une création de release manuelle
+        if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'release' && github.event.action == 'created')
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Utilise le nom du tag comme nom de la release
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          # Définir à true pour une release préliminaire, false pour une release finale
+          prerelease: false
+          # Chemin vers les fichiers à attacher à la release
+          files: |
+            .firmware/*.bin
+            .firmware/*.bin.ota
