@@ -302,87 +302,55 @@ void ParseCallback(char *topic, byte *payload, unsigned int length)
                     }
                 } */
         // Check for Door Status
-if (!messageobject["print"]["home_flag"].isNull())
-{
-    long homeFlag = messageobject["print"]["home_flag"];
-    bool doorState = bitRead(homeFlag, 23); // Bit 23 = door open
-
-    if (printerVariables.doorOpen != doorState)
-    {
-        printerVariables.doorOpen = doorState;
-
-        if (printerConfig.debugingchange)
+        if (!messageobject["print"]["home_flag"].isNull())
         {
-            LogSerial.print(F("[MQTT] Door "));
-            LogSerial.println(doorState ? F("Opened") : F("Closed"));
-        }
+            long homeFlag = messageobject["print"]["home_flag"];
+            bool doorState = bitRead(homeFlag, 23); // Bit 23 = door open
 
-        // Door opened
-        if (doorState)
-        {
-            printerVariables.lastdoorOpenms = millis();
-
-            // If light is off, turn it on and lock it
-            if (printerConfig.controlChamberLight && !printerVariables.printerledstate)
+            if (printerVariables.doorOpen != doorState)
             {
-                printerVariables.chamberLightLocked = true;
-                printerVariables.printerledstate = true;
-                printerConfig.replicate_update = false;
-                controlChamberLight(true);
-                printerVariables.stage = 255;
-                LogSerial.println(F("[MQTT] Door opened – Light forced ON"));
+                printerVariables.doorOpen = doorState;
+
+                if (printerConfig.debugingchange)
+                {
+                    LogSerial.print(F("[MQTT] Door "));
+                    LogSerial.println(doorState ? F("Opened") : F("Closed"));
+                }
+
+                // Door opened
+                if (doorState)
+                {
+                    // printerVariables.lastdoorOpenms = millis();
+
+                    // Restart inactivity timer
+                    printerConfig.inactivityStartms = millis();
+                    printerConfig.isIdleOFFActive = false;
+
+                    Changed = true;
+                    // updateleds();
+                }
+
+                else // Door closed
+                {
+                    printerVariables.lastdoorClosems = millis();
+
+                    // Reset inactivity timer
+                    printerConfig.inactivityStartms = millis();
+                    printerConfig.isIdleOFFActive = false;
+
+                    // // Double-close detection
+                    if ((millis() - printerVariables.lastdoorOpenms) < 2000)
+                    {
+                        printerVariables.doorSwitchTriggered = true;
+                    }
+
+                    Changed = true;
+                    //  updateleds();
+
+                }
+
             }
-
-            // Restart inactivity timer
-            printerConfig.inactivityStartms = millis();
-            printerConfig.isIdleOFFActive = false;
-
-            Changed = true;
-            updateleds();
         }
-
-else // Door closed
-{
-    printerVariables.lastdoorClosems = millis();
-
-    // Turn off chamber light if enabled
-    if (printerConfig.controlChamberLight)
-    {
-        //controlChamberLight(false);
-        printerVariables.chamberLightLocked = false;
-        //LogSerial.println(F("[MQTT] Door closed – Chamber light OFF"));
-    }
-
-    if (!printerConfig.inactivityEnabled)
-    {
-        // Turn off LED bar immediately
-        printerVariables.printerledstate = false;
-        printerConfig.replicate_update = false;
-        printerVariables.stage = 999;
-        tweenToColor(0,0,0,0,0);
-        controlChamberLight(false);
-        LogSerial.println(F("[MQTT] Door closed – LED bar OFF (inactivity disabled)"));
-    }
-
-    // Reset inactivity timer
-    printerConfig.inactivityStartms = millis();
-    printerConfig.isIdleOFFActive = false;
-
-    // Double-close detection
-    if ((millis() - printerVariables.lastdoorOpenms) < 2000)
-    {
-        printerVariables.doorSwitchTriggered = true;
-    }
-
-    Changed = true;
-     updateleds();
-
-}
-
-    }
-}
-
-
 
         // Check BBLP Stage
         if (!messageobject["print"]["stg_cur"].isNull())
@@ -632,6 +600,8 @@ else // Door closed
             printerConfig.testcolor_update = true;
 
             updateleds();
+            
+            printerVariables.doorSwitchTriggered = false; // End the doorSwitchTriggered state after the updateleds
         }
     }
     else
