@@ -42,7 +42,10 @@ extern "C"
         bool waitingForDoor = false;            // Are we waiting for the door to be actuated?
         unsigned long lastdoorClosems = 0;      // Last time door was opened
         unsigned long lastdoorOpenms = 0;       // Last time door was closed
+        bool chamberLightLocked = false;  // blocks replicate while true
+        bool ledWasForcedByDoor = false;
     } PrinterVariables;
+    PrinterVariables printerVariables;
 
     typedef struct SecurityVariables{
                 // Security
@@ -51,7 +54,7 @@ extern "C"
     }SecurityVariables;
     SecurityVariables securityVariables;
 
-    PrinterVariables printerVariables;
+
 
     typedef struct GlobalVariablesStruct{
         char SSID[32];
@@ -123,6 +126,7 @@ extern "C"
         COLOR bedTempRGB;
         // HMS Error Handling
         String hmsIgnoreList; // comma-separated list of HMS_XXXX_XXXX_XXXX_XXXX codes to ignore
+        
 
     } PrinterConfig;
 
