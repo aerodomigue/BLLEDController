@@ -267,41 +267,6 @@ void ParseCallback(char *topic, byte *payload, unsigned int length)
         }
 
         // Check for Door Status
-        /*         if (!messageobject["print"]["home_flag"].isNull())
-                {
-                    // https://github.com/greghesp/ha-bambulab/blob/main/custom_components/bambu_lab/pybambu/const.py#L324
-
-                    bool doorState = false;
-                    long homeFlag = 0;
-                    homeFlag = messageobject["print"]["home_flag"];
-                    doorState = bitRead(homeFlag, 23);
-
-                    if (printerVariables.doorOpen != doorState)
-                    {
-                        printerVariables.doorOpen = doorState;
-
-                        if (printerConfig.debugingchange)
-                            LogSerial.print(F("[MQTT] Door "));
-                        if (printerVariables.doorOpen)
-                        {
-                            printerVariables.lastdoorOpenms = millis();
-                            if (printerConfig.debugingchange)
-                                LogSerial.println(F("Opened"));
-                        }
-                        else
-                        {
-                            if ((millis() - printerVariables.lastdoorClosems) < 6000)
-                            {
-                                printerVariables.doorSwitchTriggered = true;
-                            }
-                            printerVariables.lastdoorClosems = millis();
-                            if (printerConfig.debugingchange)
-                                LogSerial.println(F("Closed"));
-                        }
-                        Changed = true;
-                    }
-                } */
-        // Check for Door Status
         if (!messageobject["print"]["home_flag"].isNull())
         {
             long homeFlag = messageobject["print"]["home_flag"];

@@ -386,20 +386,14 @@ void updateleds()
 
     // TOGGLE LIGHTS via DOOR
     // Activate printer light upon door opening if currently off
-    if (printerConfig.turnOnLightWhenDoorIsOpen) {
-        if (printerVariables.doorOpen && printerVariables.printerledstate == false) {
+    if (printerConfig.turnOnLightWhenDoorIsOpen && printerVariables.printerledstate == false) {
+        if (printerVariables.doorOpen) {
             if (printerConfig.debuging || printerConfig.debugingchange)
             {
                 LogSerial.println(F("Updating from finishloop after Door interaction - Turn on/off light -> Turn on light"));
             }
-            tweenToColor(0, 0, 0, 255, 255); // ON
             printerVariables.printerledstateFromDoor = true;
-            printerConfig.isIdleOFFActive = false;
-            if (printerConfig.controlChamberLight)
-            {
-                controlChamberLight(true);
-            }
-            return;
+            printerConfig.replicate_update = true; // Force update to turn on lights
         }
         if (printerVariables.doorOpen == false && printerVariables.printerledstateFromDoor == true) {
             if (printerConfig.debuging || printerConfig.debugingchange)
@@ -407,16 +401,7 @@ void updateleds()
                 LogSerial.println(F("Updating from finishloop after Door interaction - Turn on/off light -> Turn off light"));
             }
             printerVariables.printerledstateFromDoor = false;
-            // Before to turn off the led we need to check if the printer light is not turn on
-            if (printerVariables.printerledstate == false) {
-                tweenToColor(0, 0, 0, 0, 0); // OFF
-                printerConfig.isIdleOFFActive = true;
-                printerConfig.inactivityStartms = millis() - printerConfig.inactivityTimeOut;
-                if (printerConfig.controlChamberLight)
-                {
-                    controlChamberLight(false);
-                }
-            }
+            tweenToColor(0, 0, 0, 0, 0); // OFF
             return;
         }
     }
@@ -518,7 +503,7 @@ void updateleds()
     }
 
     // replicate printer behaviour OFF
-    if (printerConfig.replicatestate && printerConfig.replicate_update && printerVariables.printerledstate == false)
+    if (printerConfig.replicatestate && printerConfig.replicate_update && (printerVariables.printerledstate == false && printerVariables.printerledstateFromDoor == false))
     {
         tweenToColor(0, 0, 0, 0, 0); // OFF
         printLogs("LED Replication OFF", 0, 0, 0, 0, 0);
@@ -658,7 +643,7 @@ void updateleds()
     }
 
     // replicate printer behaviour ON
-    if (printerConfig.replicatestate && printerConfig.replicate_update && printerVariables.printerledstate && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))))
+    if (printerConfig.replicatestate && printerConfig.replicate_update && (printerVariables.printerledstate || printerVariables.printerledstateFromDoor) && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))))
     {
         tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
         printLogs("LED Replication ON", printerConfig.runningColor);
