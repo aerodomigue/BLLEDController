@@ -1,0 +1,5 @@
+# Requirements for BLLED Printer MQTT Simulator
+# Python MQTT client library
+paho-mqtt>=1.6.0
+# Modern embedded MQTT broker (successor to hbmqtt, compatible with Python 3.13)
+amqtt>=0.11.0
