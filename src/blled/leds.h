@@ -393,7 +393,14 @@ void updateleds()
                 LogSerial.println(F("Updating from finishloop after Door interaction - Turn on/off light -> Turn on light"));
             }
             printerVariables.printerledstateFromDoor = true;
-            printerConfig.replicate_update = true; // Force update to turn on lights
+            // Check if the print is finished
+            if (printerVariables.finished) {
+                tweenToColor(printerConfig.finishColor); // Customisable - Default is GREEN
+                printLogs("Turn on light", printerConfig.finishColor);
+            } else {
+                tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+                printLogs("Turn on light", printerConfig.runningColor);
+            }
         }
         if (printerVariables.doorOpen == false && printerVariables.printerledstateFromDoor == true) {
             if (printerConfig.debuging || printerConfig.debugingchange)
@@ -401,7 +408,9 @@ void updateleds()
                 LogSerial.println(F("Updating from finishloop after Door interaction - Turn on/off light -> Turn off light"));
             }
             printerVariables.printerledstateFromDoor = false;
+            printerVariables.finished = false;
             tweenToColor(0, 0, 0, 0, 0); // OFF
+            printLogs("Turn off light", 0, 0, 0, 0, 0);
             return;
         }
     }
@@ -466,32 +475,6 @@ void updateleds()
         };
     };
 
-    // BLUE -- BLUE -- BLUE -- BLUE
-
-    // Pause (by user or via Gcode)
-    if ((printerVariables.stage == 16 || printerVariables.stage == 30) || printerVariables.gcodeState == "PAUSE")
-    {
-        tweenToColor(printerConfig.pauseRGB); // Customisable - Default is BLUE
-        printLogs("Stage 16, gcodeState pause, PAUSED", printerConfig.pauseRGB);
-        return;
-    }
-
-    // First Layer Error PAUSED
-    if (printerVariables.stage == 34)
-    {
-        tweenToColor(printerConfig.firstlayerRGB); // Customisable - Default is BLUE
-        printLogs("Stage 34, FIRST LAYER ERROR, PAUSED", printerConfig.firstlayerRGB);
-        return;
-    }
-
-    // Nozzle Clog PAUSED
-    if (printerVariables.stage == 35)
-    {
-        tweenToColor(printerConfig.nozzleclogRGB); // Customisable - Default is BLUE
-        printLogs("Stage 35, NOZZLE CLOG, PAUSED", printerConfig.nozzleclogRGB);
-        return;
-    }
-
     // OFF -- OFF -- OFF -- OFF
 
     // printer offline and MQTT disconnect more than 5 seconds.
@@ -511,150 +494,183 @@ void updateleds()
         return;
     }
 
-    // Cleaning nozzle
-    if (printerVariables.stage == 14)
-    {
-        tweenToColor(printerConfig.stage14Color); // Customisable - Default is OFF
-        printLogs("Stage 14, CLEANING NOZZLE", printerConfig.stage14Color);
-        return;
-    }
+    if (printerVariables.printerledstate) {
+        // BLUE -- BLUE -- BLUE -- BLUE
 
-    // Auto Bed Leveling
-    if (printerVariables.stage == 1)
-    {
-        tweenToColor(printerConfig.stage1Color); // Customisable - Default is OFF
-        printLogs("Stage 1, BED LEVELING", printerConfig.stage1Color);
-        return;
-    }
-
-    // Calibrating Extrusion
-    if (printerVariables.stage == 8)
-    {
-        tweenToColor(printerConfig.stage8Color); // Customisable - Default is OFF
-        printLogs("Stage 8, CALIBRATING EXTRUSION", printerConfig.stage8Color);
-        return;
-    }
-
-    // Scaning surface
-    if (printerVariables.stage == 9)
-    {
-        tweenToColor(printerConfig.stage9Color); // Customisable - Default is OFF
-        printLogs("Stage 9, SCANNING BED SURFACE", printerConfig.stage9Color);
-        return;
-    }
-
-    // Inspecting First Layer
-    if (printerVariables.stage == 10 || printerVariables.overridestage == 10)
-    {
-        tweenToColor(printerConfig.stage10Color); // Customisable - Default is OFF
-        printLogs("Stage 10 / HMS 0C00, FIRST LAYER INSPECTION", printerConfig.stage10Color);
-        return;
-    }
-
-    // Calibrating  MicroLidar
-    if (printerVariables.stage == 12)
-    {
-        tweenToColor(printerConfig.stage10Color);
-        printLogs("Stage 12, CALIBRATING MICRO LIDAR", printerConfig.stage10Color);
-        return;
-    }
-
-    // Idle Timeout (Has to be enabled)
-    if ((printerVariables.stage == -1 || printerVariables.stage == 255) && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))) && (millis() - printerConfig.inactivityStartms) > printerConfig.inactivityTimeOut && printerConfig.isIdleOFFActive == false && printerConfig.inactivityEnabled)
-    {
-        tweenToColor(0, 0, 0, 0, 0); // OFF
-        controlChamberLight(false);  // Turn off chamber light via MQTT
-        printerConfig.isIdleOFFActive = true;
-        if (printerConfig.debuging || printerConfig.debugingchange)
+        // Pause (by user or via Gcode)
+        if ((printerVariables.stage == 16 || printerVariables.stage == 30) || printerVariables.gcodeState == "PAUSE")
         {
-            LogSerial.print(F("Idle Timeout ["));
-            LogSerial.print((int)(printerConfig.inactivityTimeOut / 60000));
-            LogSerial.println(F(" mins] - Turning LEDs OFF"));
-        };
-        return;
-    }
+            tweenToColor(printerConfig.pauseRGB); // Customisable - Default is BLUE
+            printLogs("Stage 16, gcodeState pause, PAUSED", printerConfig.pauseRGB);
+            return;
+        }
 
-    // ON -- ON -- ON -- ON
+        // First Layer Error PAUSED
+        if (printerVariables.stage == 34)
+        {
+            tweenToColor(printerConfig.firstlayerRGB); // Customisable - Default is BLUE
+            printLogs("Stage 34, FIRST LAYER ERROR, PAUSED", printerConfig.firstlayerRGB);
+            return;
+        }
 
-    // Preheating Bed
-    if (printerVariables.stage == 2)
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("Stage 2, PREHEATING BED", printerConfig.runningColor);
-        return;
-    }
+        // Nozzle Clog PAUSED
+        if (printerVariables.stage == 35)
+        {
+            tweenToColor(printerConfig.nozzleclogRGB); // Customisable - Default is BLUE
+            printLogs("Stage 35, NOZZLE CLOG, PAUSED", printerConfig.nozzleclogRGB);
+            return;
+        }
 
-    // Printing or Resume after Pausing
-    if (printerVariables.stage == 0 && printerVariables.gcodeState == "RUNNING")
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("Stage 0, PRINTING - gcodeState RUNNING", printerConfig.runningColor);
-        return;
-    }
+        // Cleaning nozzle
+        if (printerVariables.stage == 14)
+        {
+            tweenToColor(printerConfig.stage14Color); // Customisable - Default is OFF
+            printLogs("Stage 14, CLEANING NOZZLE", printerConfig.stage14Color);
+            return;
+        }
 
-    // for IDLE - P1 uses 255, X1 uses -1
-    if ((printerVariables.stage == -1 || printerVariables.stage == 255) && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))) && (millis() - printerConfig.inactivityStartms < printerConfig.inactivityTimeOut))
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("Stage -1/255, IDLE", printerConfig.runningColor);
-        return;
-    }
+        // Auto Bed Leveling
+        if (printerVariables.stage == 1)
+        {
+            tweenToColor(printerConfig.stage1Color); // Customisable - Default is OFF
+            printLogs("Stage 1, BED LEVELING", printerConfig.stage1Color);
+            return;
+        }
 
-    // User Cancelled Print
-    if (printerVariables.gcodeState == "FAILED")
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("Stage -1/255, FAILED", printerConfig.runningColor);
-        return;
-    }
-    // Print file just sent
-    if (printerVariables.gcodeState == "PREPARE")
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("Stage -1/255, PREPARE", printerConfig.runningColor);
-        return;
-    }
+        // Calibrating Extrusion
+        if (printerVariables.stage == 8)
+        {
+            tweenToColor(printerConfig.stage8Color); // Customisable - Default is OFF
+            printLogs("Stage 8, CALIBRATING EXTRUSION", printerConfig.stage8Color);
+            return;
+        }
 
-    // Homing ToolHead
-    if (printerVariables.stage == 13)
-    {
-        // No color change assigned
-        LogSerial.println(F("STAGE 13, HOMING TOOL HEAD"));
-        return;
-    }
+        // Scaning surface
+        if (printerVariables.stage == 9)
+        {
+            tweenToColor(printerConfig.stage9Color); // Customisable - Default is OFF
+            printLogs("Stage 9, SCANNING BED SURFACE", printerConfig.stage9Color);
+            return;
+        }
 
-    // Offline
-    if (printerVariables.gcodeState == "OFFLINE" || printerVariables.stage == -2)
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("Stage -1/255, OFFLINE", printerConfig.runningColor);
-        return;
-    }
+        // Inspecting First Layer
+        if (printerVariables.stage == 10 || printerVariables.overridestage == 10)
+        {
+            tweenToColor(printerConfig.stage10Color); // Customisable - Default is OFF
+            printLogs("Stage 10 / HMS 0C00, FIRST LAYER INSPECTION", printerConfig.stage10Color);
+            return;
+        }
 
-    // GREEN -- GREEN -- GREEN -- GREEN
+        // Calibrating  MicroLidar
+        if (printerVariables.stage == 12)
+        {
+            tweenToColor(printerConfig.stage10Color);
+            printLogs("Stage 12, CALIBRATING MICRO LIDAR", printerConfig.stage10Color);
+            return;
+        }
 
-    // Sets to green when print finishes AND user wants Finish Indication enabled
-    if (printerVariables.finished == true && printerConfig.finishindication == true)
-    {
-        tweenToColor(printerConfig.finishColor); // Customisable - Default is GREEN
-        printLogs("Finished print", printerConfig.finishColor);
-        printerVariables.finished = false;
-        return;
-    }
+        // Idle Timeout (Has to be enabled)
+        if ((printerVariables.stage == -1 || printerVariables.stage == 255) && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))) && (millis() - printerConfig.inactivityStartms) > printerConfig.inactivityTimeOut && printerConfig.isIdleOFFActive == false && printerConfig.inactivityEnabled)
+        {
+            tweenToColor(0, 0, 0, 0, 0); // OFF
+            controlChamberLight(false);  // Turn off chamber light via MQTT
+            printerConfig.isIdleOFFActive = true;
+            if (printerConfig.debuging || printerConfig.debugingchange)
+            {
+                LogSerial.print(F("Idle Timeout ["));
+                LogSerial.print((int)(printerConfig.inactivityTimeOut / 60000));
+                LogSerial.println(F(" mins] - Turning LEDs OFF"));
+            };
+            return;
+        }
 
-    // replicate printer behaviour ON
-    if (printerConfig.replicatestate && printerConfig.replicate_update && (printerVariables.printerledstate || printerVariables.printerledstateFromDoor) && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))))
-    {
-        tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
-        printLogs("LED Replication ON", printerConfig.runningColor);
-        printerConfig.replicate_update = false;
-        return;
-    }
+        // ON -- ON -- ON -- ON
 
-    // Ensure doorSwitchTriggered is processed immediately
-    if (printerVariables.doorSwitchTriggered)
-    {
-        updateleds();
+        // Preheating Bed
+        if (printerVariables.stage == 2)
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("Stage 2, PREHEATING BED", printerConfig.runningColor);
+            return;
+        }
+
+        // Printing or Resume after Pausing
+        if (printerVariables.stage == 0 && printerVariables.gcodeState == "RUNNING")
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("Stage 0, PRINTING - gcodeState RUNNING", printerConfig.runningColor);
+            return;
+        }
+
+        // for IDLE - P1 uses 255, X1 uses -1
+        if (
+            (printerVariables.stage == -1 || printerVariables.stage == 255)
+            && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))) 
+            && (millis() - printerConfig.inactivityStartms < printerConfig.inactivityTimeOut)
+        )
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("Stage -1/255, IDLE", printerConfig.runningColor);
+            return;
+        }
+
+        // User Cancelled Print
+        if (printerVariables.gcodeState == "FAILED")
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("Stage -1/255, FAILED", printerConfig.runningColor);
+            return;
+        }
+        // Print file just sent
+        if (printerVariables.gcodeState == "PREPARE")
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("Stage -1/255, PREPARE", printerConfig.runningColor);
+            return;
+        }
+
+        // Homing ToolHead
+        if (printerVariables.stage == 13)
+        {
+            // No color change assigned
+            LogSerial.println(F("STAGE 13, HOMING TOOL HEAD"));
+            return;
+        }
+
+        // Offline
+        if (printerVariables.gcodeState == "OFFLINE" || printerVariables.stage == -2)
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("Stage -1/255, OFFLINE", printerConfig.runningColor);
+            return;
+        }
+
+        // GREEN -- GREEN -- GREEN -- GREEN
+
+        // Sets to green when print finishes AND user wants Finish Indication enabled
+        if (printerVariables.finished == true && printerConfig.finishindication == true)
+        {
+            tweenToColor(printerConfig.finishColor); // Customisable - Default is GREEN
+            printLogs("Finished print", printerConfig.finishColor);
+            printerVariables.finished = false;
+            return;
+        }
+
+        // replicate printer behaviour ON
+        if (printerConfig.replicatestate && printerConfig.replicate_update && (printerVariables.printerledstate || printerVariables.printerledstateFromDoor) && !((printerConfig.finishExit && printerVariables.waitingForDoor) || (printerConfig.finishExit == false && ((millis() - printerConfig.finishStartms) < printerConfig.finishTimeOut))))
+        {
+            tweenToColor(printerConfig.runningColor); // Customisable - Default is WHITE
+            printLogs("LED Replication ON", printerConfig.runningColor);
+            printerConfig.replicate_update = false;
+            return;
+        }
+
+         // Ensure doorSwitchTriggered is processed immediately
+        if (printerVariables.doorSwitchTriggered)
+        {
+            updateleds();
+            return;
+        }
     }
 }
 
